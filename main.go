@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 )
 
 // cli parse cli arguments
@@ -29,13 +30,22 @@ func cli() (num int) {
 
 }
 
-// main implementation of this problem https://www.youtube.com/watch?v=-UBDRX6bk-A
-func main() {
-	var num int = cli()
-
+// getswitches filter switches that stays on implementation of this problem https://www.youtube.com/watch?v=-UBDRX6bk-A
+func getswitches(switches *[]int, num int) {
 	for i := 1; i <= num; i++ {
-		if sqr := i * i; sqr <= num {
-			fmt.Println(sqr)
+		if multiple := i * i; multiple <= num {
+			*switches = append(*switches, multiple)
 		}
 	}
+
+}
+
+// main func
+func main() {
+	var (
+		num      int = cli()
+		switches     = make([]int, 0)
+	)
+	getswitches(&switches, num)
+	fmt.Println(strings.Trim(fmt.Sprint(switches), "[]"))
 }
